@@ -1,0 +1,21 @@
+body[data-theme="dark"] {
+
+	.bottom-decor {
+
+		.first {
+			fill-opacity: .09;
+		}
+
+		.second {
+			fill: #E5E5E5;
+			fill-opacity: .13;
+		}
+	}
+}
+
+.bottom-decor {
+	width: 1920px;
+	height: 111px;
+	position: absolute;
+	bottom: 0;
+}
