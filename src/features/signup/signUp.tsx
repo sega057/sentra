@@ -1,13 +1,11 @@
 import React from "react";
-import {Link} from "react-router-dom";
-// import {useNavigate} from "react-router";
-// import {loggedIn} from "../user/user-slice";
+import {Link, useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
-import {AuthPage} from "../../pages/login/auth";
-import {LoginForm} from "../../pages/login/components/login-form";
-import {BtnSubmit} from "../../pages/login/components/btn-submit";
-import {NewPasswordForm} from "./newPassForm";
+import {loggedIn} from "../user/userSlice";
 import {setLogin} from "./signUpSlice";
+import {LoginForm} from "../../components/loginForm";
+import {BtnSubmit} from "../../components/btnSubmit";
+import {NewPasswordForm} from "./newPassForm";
 import {RepeatPasswordForm} from "./repeatPassForm";
 
 export const SignUpPage: React.FC = () => {
@@ -35,7 +33,7 @@ export const SignUpPage: React.FC = () => {
 		// }
 	}
 
-	return <AuthPage>
+	return <>
 		<h1>Sign up</h1>
 		<p className="sub-title">Sign up to get best social media!</p>
 		<form className="form" onSubmit={handleSubmit}>
@@ -47,6 +45,6 @@ export const SignUpPage: React.FC = () => {
 			</div>
 			<BtnSubmit text="Sign up" />
 		</form>
-	</AuthPage>
+	</>
 }
 

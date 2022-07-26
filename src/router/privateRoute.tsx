@@ -1,10 +1,9 @@
 import React from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 import {useAppSelector} from "../app/hooks";
-import {selectAuth} from "../features/user/user-slice";
+import {selectAuth} from "../features/user/userSlice";
 
-export const PrivateRoute = ({children}: { children: JSX.Element }) => {
+export const PrivateRoute = () => {
     const isAuth = useAppSelector(selectAuth);
-
-    return isAuth ? children : <Navigate to="/login" />;
+    return isAuth ? <Outlet/> : <Navigate to="/login" replace />;
 }

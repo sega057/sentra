@@ -1,7 +1,7 @@
 import React from "react";
 import moment from "moment";
 import {Theme, useTheme} from "../../app/hooks";
-import "./theme-btn.scss";
+import "./themeBtn.scss";
 
 export const ThemeBtn = () => {
 	const [isDark, setTheme] = React.useState(getIsDarkTheme);

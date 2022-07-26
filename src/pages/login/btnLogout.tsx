@@ -1,5 +1,5 @@
 import {useAppDispatch} from "../../app/hooks";
-import {logout} from "../../features/user/user-slice";
+import {logout} from "../../features/user/userSlice";
 
 export const BtnLogout = () => {
 	const dispatch = useAppDispatch();
