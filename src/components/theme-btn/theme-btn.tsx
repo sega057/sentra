@@ -1,6 +1,6 @@
 import React from "react";
 import moment from "moment";
-import {Theme, useTheme} from "../hooks/use-theme";
+import {Theme, useTheme} from "../../app/hooks";
 import "./theme-btn.scss";
 
 export const ThemeBtn = () => {

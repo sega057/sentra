@@ -1,13 +1,4 @@
-@import "variables";
-
-body {
-	&[data-theme="dark"] {
-		.btn-green {
-			color: white;
-		}
-	}
-}
-
+@use "variables" as *;
 
 .btn-green {
 	background-color: $color-green;

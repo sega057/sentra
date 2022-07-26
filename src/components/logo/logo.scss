@@ -1,0 +1,17 @@
+@import "../../common/index";
+
+.logo {
+	.fill {
+		fill: $color-theme-reverse;
+	}
+	.stroke {
+		stroke: $color-theme-light;
+	}
+}
+
+main > .logo {
+	position: absolute;
+	top: 40px;
+	left: 40px;
+	line-height: 1px;
+}

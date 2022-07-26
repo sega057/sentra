@@ -6,25 +6,23 @@ body {
 	font-family: $font-primary;
 	color: $color-primary;
 
-	&[data-theme="light"] {
-		background-color: $theme-light;
+	background-color: $color-theme;
 
-		.light-green {
-			color: $color-green!important;
-		}
-	}
-
-	&[data-theme="dark"] {
-		background-color: $theme-dark;
-
-		h1, h2, h3, h4, h5, h6, p, a, span {
-			color: white;
-		}
-
-		.dark-green {
-			color: $color-green!important;
-		}
-	}
+	//&[data-theme="light"] {
+	//	background-color: $theme-light;
+	//
+	//	.light-green {
+	//		color: $color-green!important;
+	//	}
+	//}
+	//
+	//&[data-theme="dark"] {
+	//	background-color: $theme-dark;
+	//
+	//	.dark-green {
+	//		color: $color-green!important;
+	//	}
+	//}
 }
 
 p {

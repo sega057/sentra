@@ -1,5 +1,5 @@
 import React from "react";
-import {Logo} from "../modules/logo/logo";
+import {Logo} from "../../components/logo/logo";
 import {BottomDecor} from "./components/bottom-decor/bottom-decor";
 import "./auth.scss";
 

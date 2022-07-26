@@ -1,4 +1,4 @@
-@import "src/common/styles";
+@use "../../common/variables" as *;
 
 .auth {
 	display: flex;
@@ -43,7 +43,7 @@
 			padding: (14em/14) (18em/14);
 			background-color: $color-primary;
 			font-size: (14em/16);
-			color: #FFFFFF;
+			color: $color-theme;
 			transition: box-shadow .15s linear;
 
 			&:hover,
@@ -52,7 +52,7 @@
 			}
 
 			&:-webkit-autofill { // Redefine browser bgc for input
-				-webkit-box-shadow: 0 0 0 50px $color-primary inset;
+				-webkit-box-shadow: 0 0 0 50px $color-prim-dark inset;
 				-webkit-text-fill-color: #FFFFFF;
 			}
 		}

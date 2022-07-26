@@ -1,13 +1,13 @@
 import React from "react";
 import {useNavigate} from "react-router";
-import {useAppDispatch} from "../app/hooks";
-import {loggedIn} from "../features/user/user-slice";
+import {useAppDispatch} from "../../app/hooks";
+import {loggedIn} from "../../features/user/user-slice";
 import {Link} from "react-router-dom";
 import {AuthPage} from "./auth";
 import {LoginForm} from "./components/login-form";
 import {PasswordForm} from "./components/password-form";
 import {BtnSubmit} from "./components/btn-submit";
-import {useInput} from "../modules/hooks/use-input";
+import {useInput} from "../../app/hooks";
 
 export const SignInPage: React.FC = () => {
 	const navigate = useNavigate();
@@ -34,7 +34,7 @@ export const SignInPage: React.FC = () => {
 			<PasswordForm {...{password, handleChange: handlePassChange}} />
 			<div className="btn-container">
 				<Link to="/signup">Sign up</Link>
-				<Link className="dark-green" to="/password_reset">Forgot password?</Link>
+				<Link to="/password_reset">Forgot password?</Link>
 			</div>
 			<BtnSubmit text="Login"/>
 		</form>

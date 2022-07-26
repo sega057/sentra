@@ -1,29 +1,29 @@
 import React from "react";
-import {useNavigate} from "react-router";
-import {loggedIn} from "../../features/user/user-slice";
-import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import {Link} from "react-router-dom";
-import {AuthPage} from "../auth";
-import {LoginForm} from "../components/login-form";
-import {BtnSubmit} from "../components/btn-submit";
-import {NewPasswordForm} from "./new-pass-form";
-import {setLogin} from "../../features/signup/signup-slice";
-import {RepeatPasswordForm} from "./pass-repeat";
+// import {useNavigate} from "react-router";
+// import {loggedIn} from "../user/user-slice";
+import {useAppDispatch, useAppSelector} from "../../app/hooks";
+import {AuthPage} from "../../pages/login/auth";
+import {LoginForm} from "../../pages/login/components/login-form";
+import {BtnSubmit} from "../../pages/login/components/btn-submit";
+import {NewPasswordForm} from "./newPassForm";
+import {setLogin} from "./signUpSlice";
+import {RepeatPasswordForm} from "./repeatPassForm";
 
 export const SignUpPage: React.FC = () => {
 	// const navigate = useNavigate();
-	const {username, password, isPasswordsEq} =
+	const {username} =
 		useAppSelector((state) => state.signup);
 	const dispatch = useAppDispatch();
 
 	const setLoginDispatch = (login: string) => dispatch(setLogin(login));
 
-	const isDataValid = (): boolean => {
-		const isPassValid = password.value.length >= 6
-			&& Object.values(password.checks).every(val => val === true);
-
-		return username.length >= 4 && isPassValid && isPasswordsEq;
-	}
+	// const isDataValid = (): boolean => {
+	// 	const isPassValid = password.value.length >= 6
+	// 		&& Object.values(password.checks).every(val => val === true);
+	//
+	// 	return username.length >= 4 && isPassValid && isPasswordsEq;
+	// }
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();

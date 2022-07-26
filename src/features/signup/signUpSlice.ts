@@ -47,7 +47,7 @@ const validatePass = (password: string): PassChecks => {
 	return errors;
 }
 
-export const signupSlice = createSlice({
+export const signUpSlice = createSlice({
 	name: "signup",
 	initialState,
 	reducers: {
@@ -65,7 +65,7 @@ export const signupSlice = createSlice({
 	}
 });
 
-export const {setLogin, setPassword, setRepeatPass} = signupSlice.actions;
+export const {setLogin, setPassword, setRepeatPass} = signUpSlice.actions;
 
 export const signup = {
 	select: <T extends keyof SignupState>(selector: T) => (state: RootState): SignupState[T] => state.signup[selector],
@@ -73,4 +73,4 @@ export const signup = {
 	selectPassChecks: (state: RootState) => state.signup.password.checks,
 }
 
-export default signupSlice.reducer;
+export default signUpSlice.reducer;
