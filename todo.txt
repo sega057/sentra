@@ -1,0 +1,5 @@
+- move styles from auth.scss
+- add eslint config
+- update deps
+- add prettier
+- add webpack

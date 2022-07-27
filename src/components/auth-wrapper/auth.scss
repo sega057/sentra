@@ -1,0 +1,160 @@
+@use "../../assets/styles/variables" as *;
+
+// TODO move form/input styles
+
+.auth {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+
+	.container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-bottom: 50px;
+	}
+
+	h1 {
+		margin: 0 0 (40em/64);
+		font-family: $font-secondary;
+		font-size: (64em/16);
+		font-weight: $normal;
+	}
+
+	.sub-title {
+		margin-bottom: (35em/16);
+		font-family: $font-secondary;
+	}
+
+	.form {
+		display: flex;
+		flex-direction: column;
+		max-width: 300px;
+
+		input {
+			width: 300px;
+			border-radius: 10px;
+			border: none;
+			font-family: $font-secondary;
+			transition: box-shadow .15s linear;
+		}
+
+		.form-control {
+			margin-bottom: (30em/14);
+			padding: (14em/14) (18em/14);
+			background-color: $color-primary;
+			font-size: (14em/16);
+			color: $color-theme;
+			transition: box-shadow .15s linear;
+
+			&:hover,
+			&:focus {
+				box-shadow: 1px 1px 10px #4a4a4a;
+			}
+
+			&:-webkit-autofill { // Redefine browser bgc for input
+				-webkit-box-shadow: 0 0 0 50px $color-prim-dark inset;
+				-webkit-text-fill-color: #FFFFFF;
+			}
+		}
+
+		.btn-container {
+			display: flex;
+			justify-content: space-between;
+			margin-bottom: (20em/16);
+
+			a {
+				font-weight: $medium;
+				font-size: (14em/16);
+			}
+		}
+
+		.form-container {
+			margin-bottom: (30em/16);
+
+			.requirements {
+				display: flex;
+				flex-direction: column;
+				font-size: (13em/16);
+
+				* {
+					margin-bottom: (7em/13);
+				}
+
+				p {
+					font-weight: $medium;
+				}
+
+				.bool-dot {
+					margin-left: (30em/16);
+
+					&:before {
+						left: -20px;
+					}
+				}
+			}
+		}
+
+		.input-wrapper {
+			margin-bottom: (30em/16);
+			position: relative;
+
+			&.password {
+				.bool-dot:before {
+					right: 45px;
+				}
+			}
+
+			&.login {
+				.bool-dot:before {
+					right: 18px;
+				}
+			}
+
+			input {
+				margin-bottom: 0;
+			}
+
+			.eye {
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+
+				&:before,
+				&:after {
+					content: "";
+					height: 20px;
+					position: absolute;
+					top: 50%;
+				}
+
+				&:before {
+					width: 1px;
+					background-color: white;
+					transform: translateY(-50%) rotate(41deg);
+					right: 23px;
+				}
+				&:after {
+					width: 28px;
+					right: 10px;
+					background: url("../buttons/logout-btn/open-eye.svg") no-repeat center;
+					transform: translateY(-50%);
+					cursor: pointer;
+				}
+
+				&.show:before {
+					display: none;
+				}
+			}
+		}
+
+		.btn-green {
+			padding: (13em/16) (18em/16);
+			font-size: (16em/16);
+			cursor: pointer;
+		}
+	}
+}

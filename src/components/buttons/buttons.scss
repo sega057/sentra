@@ -1,0 +1,10 @@
+@use "../../assets/styles/variables" as *;
+
+.btn-green {
+	background-color: $color-green;
+	color: $color-primary;
+
+	&:hover {
+		box-shadow: 0 0 8px 1px #20df7fab;
+	}
+}

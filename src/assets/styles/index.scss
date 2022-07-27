@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca&family=Montserrat:wght@400;500&display=swap');
+@import "../../components/buttons/buttons";
+@import "src/assets/styles/variables";
+
+body {
+	font-family: $font-primary;
+	color: $color-primary;
+
+	background-color: $color-theme;
+
+	//&[data-theme="light"] {
+	//	background-color: $theme-light;
+	//
+	//	.light-green {
+	//		color: $color-green!important;
+	//	}
+	//}
+	//
+	//&[data-theme="dark"] {
+	//	background-color: $theme-dark;
+	//
+	//	.dark-green {
+	//		color: $color-green!important;
+	//	}
+	//}
+}
+
+p {
+	margin: 0;
+}
+
+.main {
+	height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6, p, a, span {
+	color: $color-primary;
+}
+
+.always-green {
+	color: $color-green;
+}
+
+.bool-dot {
+	position: relative;
+
+	&:before {
+		content: "";
+		width: 10px;
+		height: 10px;
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		border-radius: 50%;
+		background-color: $color-green;
+		transition: background-color .3s linear;
+	}
+
+	&.required:before {
+		background-color: $color-red;
+	}
+}
