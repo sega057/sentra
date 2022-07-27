@@ -1,5 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../../app/store";
+import {MIN_PASS_LENGTH} from "../../app/envVars";
 
 interface PassChecks {
 	lowercase?: true;
@@ -57,10 +58,19 @@ export const signUpSlice = createSlice({
 		setPassword: (state, {payload}: PayloadAction<string>) => {
 			state.password.value = payload;
 			state.password.checks = validatePass(payload);
+			if (payload.length >= MIN_PASS_LENGTH) {
+				state.isPasswordsEq = state.repeatPass === payload;
+			} else {
+				state.isPasswordsEq = false;
+			}
 		},
 		setRepeatPass: (state, {payload}: PayloadAction<string>) => {
 			state.repeatPass = payload;
-			state.isPasswordsEq = state.password.value === payload;
+			if (payload.length >= MIN_PASS_LENGTH) {
+				state.isPasswordsEq = state.password.value === payload;
+			} else {
+				state.isPasswordsEq = false;
+			}
 		},
 	}
 });
@@ -73,4 +83,4 @@ export const signup = {
 	selectPassChecks: (state: RootState) => state.signup.password.checks,
 }
 
-export default signUpSlice.reducer;
+export const signUpReducer = signUpSlice.reducer;

@@ -1,13 +1,14 @@
 import React from "react";
 import {Logo} from "../../components/logo/logo";
-import {BottomDecor} from "./components/bottom-decor/bottom-decor";
+import {Outlet} from "react-router-dom";
+import {BottomDecor} from "./bottom-decor/bottomDecor";
 import "./auth.scss";
 
-export const AuthPage: React.FC = ({children}) => {
+export const AuthPage: React.FC = () => {
 	return <main className="main auth">
 		<Logo />
 		<div className="container">
-			{children}
+			<Outlet/>
 		</div>
 		<BottomDecor />
 	</main>;

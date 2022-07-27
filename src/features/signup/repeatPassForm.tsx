@@ -1,7 +1,7 @@
 import React from "react";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import {setRepeatPass, signup} from "./signUpSlice";
-import {PasswordForm} from "../../pages/login/components/password-form";
+import {PasswordForm} from "../../components/passwordForm";
 
 export const RepeatPasswordForm = () => {
 	const repeatPassword = useAppSelector(signup.select("repeatPass"));
@@ -15,7 +15,7 @@ export const RepeatPasswordForm = () => {
 	return <PasswordForm
 		password={repeatPassword}
 		handleChange={handlePassChange}
-		boolDot={!isPassEqual}
+		isValid={!isPassEqual}
 		name="repeat password"
 		placeholder="Repeat password"
 	/>

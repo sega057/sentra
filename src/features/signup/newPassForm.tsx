@@ -1,7 +1,7 @@
 import React from "react";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import {setPassword, signup} from "./signUpSlice";
-import {PasswordForm} from "../../pages/login/components/password-form";
+import {PasswordForm} from "../../components/passwordForm";
 
 export const NewPasswordForm = () => {
 	const password = useAppSelector(signup.selectPass);
