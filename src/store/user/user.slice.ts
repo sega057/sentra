@@ -1,5 +1,5 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {RootState} from "../store";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../store";
 
 interface UserState {
 	username?: string;
@@ -16,16 +16,16 @@ export const userSlice = createSlice({
 	reducers: {
 		loggedIn: (state, action: PayloadAction<string>) => {
 			state.isAuth = true;
-			state.username = action.payload
+			state.username = action.payload;
 		},
-		logout: state => {
+		logout: (state) => {
 			state.isAuth = false;
 			delete state.username;
-		}
-	}
+		},
+	},
 });
 
-export const {loggedIn, logout} = userSlice.actions;
+export const { loggedIn, logout } = userSlice.actions;
 export const selectAuth = (state: RootState) => state.user.isAuth;
 
 export const userReducer = userSlice.reducer;

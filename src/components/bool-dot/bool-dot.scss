@@ -1,0 +1,15 @@
+@use "../../assets/styles/variables" as *;
+
+.bool-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: $color-green;
+  transition: background-color .3s linear;
+  pointer-events: none;
+
+  &.red {
+    background-color: $color-red;
+  }
+}

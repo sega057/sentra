@@ -1,43 +1,44 @@
 @import-normalize;
 
 *, *:before, *:after {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-size: 16px;
+	margin: 0;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-size: 16px;
 
-  --color-primary: #224957;
-  --color-theme: #E5E5E5;
-  --color-theme-reverse: #093545;
+	--color-primary: #224957;
+	--color-theme: #e5e5e5;
+	--color-theme-reverse: #093545;
 }
 
 body[data-theme="dark"] {
-  --color-primary: #ffffff;
-  --color-theme: #093545;
-  --color-theme-reverse: #E5E5E5;
+	--color-primary: #ffffff;
+	--color-theme: #093545;
+	--color-theme-reverse: #e5e5e5;
 }
 
 #root {
-  overflow: hidden;
+	overflow: hidden;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+		monospace;
 }
 
 ::-webkit-input-placeholder {
-  color: inherit;
-  opacity: 1;
+	color: inherit;
+	opacity: 1;
 }
 
 input {
-  outline: none;
+	outline: none;
 }
 
 a {
-  text-decoration: none;
+	text-decoration: none;
 }

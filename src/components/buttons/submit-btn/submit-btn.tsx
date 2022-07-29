@@ -1,7 +1,11 @@
 import React from "react";
 
-export const SubmitBtn: React.FC<{text: string}> = ({text}) => {
+export const SubmitBtn: React.FC<{ children?: React.ReactNode }> = ({
+	children,
+}) => {
 	return (
-		<input className="btn btn-green" type="submit" value={text}/>
-	)
-}
+		<button className="btn big btn-green pointer" type="submit">
+			{children}
+		</button>
+	);
+};

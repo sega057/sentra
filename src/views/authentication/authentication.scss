@@ -1,0 +1,28 @@
+@use "../../assets/styles/variables" as *;
+
+.auth {
+  .title {
+    margin: 0 0 (40em/64);
+    font-size: (64em/16);
+  }
+
+  .sub-title {
+    margin-bottom: (35em/16);
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+
+    .form-control {
+      width: 300px;
+    }
+
+    .btn-container {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: (20em/16);
+    }
+  }
+}

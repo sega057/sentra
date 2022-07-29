@@ -1,17 +1,16 @@
 import React from "react";
-import {Link, useNavigate} from "react-router-dom";
-import {useAppDispatch, useAppSelector} from "../../../hooks/use-app";
-import {loggedIn} from "../../../store/user/user.slice";
-import {setLogin} from "../../../store/sign-up/sign-up.slice";
-import {LoginForm} from "../../../components/forms";
-import {SubmitBtn} from "../../../components/buttons";
-import {NewPasswordForm} from "./new-pass-form";
-import {RepeatPasswordForm} from "./repeat-pass-form";
+import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../../hooks/use-app";
+import { setLogin } from "../../../store/sign-up/sign-up.slice";
+import { LoginForm } from "../../../components/forms";
+import { SubmitBtn } from "../../../components/buttons";
+import { NewPasswordForm } from "./new-pass-form";
+import { RepeatPasswordForm } from "./repeat-pass-form";
+import "../authentication.scss";
 
-export const SignUpPage: React.FC = () => {
+export const SignUpPage = () => {
 	// const navigate = useNavigate();
-	const {username} =
-		useAppSelector((state) => state.signup);
+	const { username } = useAppSelector((state) => state.signup);
 	const dispatch = useAppDispatch();
 
 	const setLoginDispatch = (login: string) => dispatch(setLogin(login));
@@ -31,20 +30,27 @@ export const SignUpPage: React.FC = () => {
 		// } else {
 		// 	window.alert("Some error happened");
 		// }
-	}
+	};
 
-	return <>
-		<h1>Sign up</h1>
-		<p className="sub-title">Sign up to get best social media!</p>
-		<form className="form" onSubmit={handleSubmit}>
-			<LoginForm boolDot={username.length < 4} login={username} setLogin={setLoginDispatch} />
-			<NewPasswordForm />
-			<RepeatPasswordForm />
-			<div className="btn-container">
-				<Link to="/login">Already have account?</Link>
-			</div>
-			<SubmitBtn text="Sign up" />
-		</form>
-	</>
-}
-
+	return (
+		<>
+			<h1 className="title">Sign up</h1>
+			<p className="sub-title">Sign up to join best social media!</p>
+			<form className="form" onSubmit={handleSubmit}>
+				<LoginForm
+					isValid={username.length < 4}
+					login={username}
+					setLogin={setLoginDispatch}
+				/>
+				<NewPasswordForm />
+				<RepeatPasswordForm />
+				<div className="btn-container">
+					<Link className="btn inline" to="/login">
+						Already have account?
+					</Link>
+				</div>
+				<SubmitBtn>Sign up</SubmitBtn>
+			</form>
+		</>
+	);
+};
