@@ -4,9 +4,8 @@ import { Link } from "react-router-dom";
 import { useAppDispatch } from "../../../hooks/use-app";
 import { useInput } from "../../../hooks/use-input";
 import { loggedIn } from "../../../store/user/user.slice";
-import { LoginForm, PasswordForm } from "../../../components/forms";
+import { LoginField, PasswordField } from "../../../components/forms";
 import { SubmitBtn } from "../../../components/buttons";
-import "../authentication.scss";
 
 export const SignInPage: React.FC = () => {
 	const navigate = useNavigate();
@@ -17,29 +16,29 @@ export const SignInPage: React.FC = () => {
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		if (password === "12341234" && login === "admin") {
+		if (password === "123456" && login === "admin") {
 			dispatch(loggedIn(login));
 			navigate("/");
 		} else {
-			window.alert("wrong auth data");
+			window.alert("test auth data: admin | 123456");
 		}
 	};
 
 	return (
 		<>
-			<h1 className="title">Sign in</h1>
-			<p className="sub-title">Sign in and start communicating!</p>
-			<form className="form" onSubmit={handleSubmit}>
-				<LoginForm {...{ login, setLogin }} />
-				<PasswordForm
+			<h1 className="mb-10 font-secondary text-6xl">Sign in</h1>
+			<p className="mb-9">Sign in and start communicating!</p>
+			<form className="w-full max-w-xs" onSubmit={handleSubmit}>
+				<LoginField {...{ login, setLogin }} />
+				<PasswordField
 					password={password}
 					handleChange={handlePassChange}
 				/>
-				<div className="btn-container">
-					<Link className="btn inline" to="/signup">
+				<div className="mb-5 flex justify-between">
+					<Link className="text-theme-reverse" to="/signup">
 						Sign up
 					</Link>
-					<Link className="btn inline" to="/password_reset">
+					<Link className="text-theme-reverse" to="/password_reset">
 						Forgot password?
 					</Link>
 				</div>

@@ -2,7 +2,7 @@ import "./bottom-decor.scss";
 
 export const BottomDecor = () => (
 	<svg
-		className="bottom-decor"
+		className="bottom-decor absolute bottom-0 -z-10 h-[111px] w-[1920px] 2xl:left-1/2 2xl:-translate-x-1/2"
 		width="1920"
 		height="111"
 		viewBox="0 0 1920 111"

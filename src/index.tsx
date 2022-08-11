@@ -3,8 +3,7 @@ import { Provider } from "react-redux";
 import { store } from "./store/store";
 import { App } from "./app";
 import { createRoot } from "react-dom/client";
-import "./assets/styles/styles.css";
-import "./assets/styles/index.scss";
+import "./assets/styles/index.css";
 
 const container = document.getElementById("root");
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

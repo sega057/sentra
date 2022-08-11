@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../store";
 import { MIN_PASS_LENGTH } from "../../utils/constants/env-vars";
 
 interface PassChecks {
@@ -15,7 +14,7 @@ interface SignUpState {
 		value: string;
 		checks: PassChecks;
 	};
-	repeatPass: string;
+	repeatPassword: string;
 	isPasswordsEq: boolean;
 }
 
@@ -30,12 +29,12 @@ const initialState: SignUpState = {
 			symbol: false,
 		},
 	},
-	repeatPass: "",
+	repeatPassword: "",
 	isPasswordsEq: false,
 };
 
 const validatePass = (password: string): PassChecks => {
-	const errors: PassChecks = {
+	const checks: PassChecks = {
 		lowercase: false,
 		uppercase: false,
 		digit: false,
@@ -43,19 +42,19 @@ const validatePass = (password: string): PassChecks => {
 	};
 
 	if (/[a-z]/g.test(password)) {
-		errors.lowercase = true;
+		checks.lowercase = true;
 	}
 	if (/[A-Z]/.test(password)) {
-		errors.uppercase = true;
+		checks.uppercase = true;
 	}
 	if (/[0-9]/.test(password)) {
-		errors.digit = true;
+		checks.digit = true;
 	}
 	if (/[!@#$%^&*(){}[:;<>,.?/\\~_+=|\]-]/.test(password)) {
-		errors.symbol = true;
+		checks.symbol = true;
 	}
 
-	return errors;
+	return checks;
 };
 
 export const signUpSlice = createSlice({
@@ -69,13 +68,13 @@ export const signUpSlice = createSlice({
 			state.password.value = payload;
 			state.password.checks = validatePass(payload);
 			if (payload.length >= MIN_PASS_LENGTH) {
-				state.isPasswordsEq = state.repeatPass === payload;
+				state.isPasswordsEq = state.repeatPassword === payload;
 			} else {
 				state.isPasswordsEq = false;
 			}
 		},
 		setRepeatPass: (state, { payload }: PayloadAction<string>) => {
-			state.repeatPass = payload;
+			state.repeatPassword = payload;
 			if (payload.length >= MIN_PASS_LENGTH) {
 				state.isPasswordsEq = state.password.value === payload;
 			} else {
@@ -86,14 +85,4 @@ export const signUpSlice = createSlice({
 });
 
 export const { setLogin, setPassword, setRepeatPass } = signUpSlice.actions;
-
-export const signup = {
-	select:
-		<T extends keyof SignUpState>(key: T) =>
-		(state: RootState): SignUpState[T] =>
-			state.signup[key],
-	selectPass: (state: RootState) => state.signup.password.value,
-	selectPassChecks: (state: RootState) => state.signup.password.checks,
-};
-
 export const signUpReducer = signUpSlice.reducer;

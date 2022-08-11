@@ -1,7 +1,6 @@
 import React from "react";
 import moment from "moment";
 import { Theme, useTheme } from "../../../hooks/use-theme";
-import "./theme-btn.scss";
 
 export const ThemeBtn = () => {
 	const [isDark, setTheme] = React.useState(getIsDarkTheme);
@@ -17,8 +16,15 @@ export const ThemeBtn = () => {
 	};
 
 	return (
-		<button onClick={handleClick} className="theme-btn">
-			<span className="semi-circle" />
+		<button
+			onClick={handleClick}
+			className="absolute left-10 bottom-10 z-10 h-16 w-16
+			cursor-pointer rounded-full border-[13.5px] border-solid border-white bg-black"
+		>
+			<span
+				className="pointer-events-none absolute top-1 right-1 bottom-1 left-1/2
+				rounded-r-2xl bg-white"
+			/>
 		</button>
 	);
 };

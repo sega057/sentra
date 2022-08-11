@@ -2,15 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../hooks/use-app";
 import { setLogin } from "../../../store/sign-up/sign-up.slice";
-import { LoginForm } from "../../../components/forms";
+import { LoginField } from "../../../components/forms";
 import { SubmitBtn } from "../../../components/buttons";
-import { NewPasswordForm } from "./new-pass-form";
-import { RepeatPasswordForm } from "./repeat-pass-form";
-import "../authentication.scss";
+import { NewPasswordField } from "./new-password-field";
+import { RepeatPasswordField } from "./repeat-password-field";
 
 export const SignUpPage = () => {
 	// const navigate = useNavigate();
-	const { username } = useAppSelector((state) => state.signup);
+	const { username } = useAppSelector((state) => state.signUp);
 	const dispatch = useAppDispatch();
 
 	const setLoginDispatch = (login: string) => dispatch(setLogin(login));
@@ -34,21 +33,22 @@ export const SignUpPage = () => {
 
 	return (
 		<>
-			<h1 className="title">Sign up</h1>
-			<p className="sub-title">Sign up to join best social media!</p>
-			<form className="form" onSubmit={handleSubmit}>
-				<LoginForm
+			<h1 className="mb-10 font-secondary text-6xl">Sign up</h1>
+			<p className="mb-9">Sign up to join best social media!</p>
+			<form className="w-full max-w-xs" onSubmit={handleSubmit}>
+				<LoginField
 					isValid={username.length < 4}
 					login={username}
 					setLogin={setLoginDispatch}
 				/>
-				<NewPasswordForm />
-				<RepeatPasswordForm />
-				<div className="btn-container">
-					<Link className="btn inline" to="/login">
-						Already have account?
-					</Link>
-				</div>
+				<NewPasswordField />
+				<RepeatPasswordField />
+				<Link
+					className="mb-5 inline-block text-theme-reverse"
+					to="/login"
+				>
+					Already have account?
+				</Link>
 				<SubmitBtn>Sign up</SubmitBtn>
 			</form>
 		</>

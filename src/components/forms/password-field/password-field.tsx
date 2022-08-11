@@ -2,9 +2,9 @@ import React, { InputHTMLAttributes } from "react";
 import { MIN_PASS_LENGTH } from "../../../utils/constants/env-vars";
 import { BoolDot } from "../../bool-dot/bool-dot";
 import { EyeToggle } from "../../eye-toggle/eye-toggle";
-import "./password-form.scss";
+import { AuthField } from "../auth-field/auth-field";
 
-interface PasswordFormProps {
+interface PasswordFieldProps {
 	password: string;
 	handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	isValid?: boolean;
@@ -14,7 +14,7 @@ type InputProps = Partial<
 	Omit<InputHTMLAttributes<HTMLInputElement>, "onChange">
 >;
 
-export const PasswordForm: React.FC<PasswordFormProps & InputProps> = ({
+export const PasswordField: React.FC<PasswordFieldProps & InputProps> = ({
 	password,
 	handleChange,
 	isValid,
@@ -27,20 +27,18 @@ export const PasswordForm: React.FC<PasswordFormProps & InputProps> = ({
 	};
 
 	return (
-		<div className="input-wrapper password">
-			<input
-				required
-				className="form-control"
-				type={showPass ? "text" : "password"}
-				name="password"
-				placeholder="Password"
-				minLength={MIN_PASS_LENGTH}
-				value={password}
-				onChange={handleChange}
-				{...rest}
-			/>
-			{isValid !== undefined && <BoolDot isRed={isValid} />}
+		<AuthField
+			required
+			type={showPass ? "text" : "password"}
+			name="password"
+			placeholder="Password"
+			minLength={MIN_PASS_LENGTH}
+			value={password}
+			onChange={handleChange}
+			{...rest}
+		>
+			{isValid !== undefined && <BoolDot isRed={isValid} inPassForm />}
 			<EyeToggle isOpened={showPass} onClick={handleShow} />
-		</div>
+		</AuthField>
 	);
 };

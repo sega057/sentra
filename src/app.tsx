@@ -4,7 +4,6 @@ import { Route } from "react-router";
 import { PrivateRoute } from "./components/routing/private-route";
 import { SignInPage } from "./views/authentication/sign-in/sign-in";
 import { SignUpPage } from "./views/authentication/sign-up/sign-up";
-import { ThemeBtn } from "./components/buttons";
 import { MainPage } from "./views/chat/main/layout";
 import { AuthPageWrapper } from "./components/auth-page-wrapper/auth-page-wrapper";
 
@@ -21,7 +20,6 @@ export const App: React.FC = () => {
 				</Route>
 				<Route path="*" element={<Navigate to="/" replace />} />
 			</Routes>
-			<ThemeBtn />
 		</BrowserRouter>
 	);
 };

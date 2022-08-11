@@ -1,5 +1,5 @@
-import { LoginForm } from "./login-form/login-form";
-import { PasswordForm } from "./password-form/password-form";
-import "./forms.scss";
+import { LoginField } from "./login-field/login-field";
+import { PasswordField } from "./password-field/password-field";
+import { AuthField } from "./auth-field/auth-field";
 
-export { LoginForm, PasswordForm };
+export { LoginField, PasswordField, AuthField };

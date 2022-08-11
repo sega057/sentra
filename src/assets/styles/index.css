@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca&family=Montserrat:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	:root {
+		--color-primary: 34, 73, 87;
+		--color-theme: 229, 229, 229;
+		--color-theme-reverse: 9, 53, 69;
+	}
+
+	[data-theme="dark"] {
+		--color-primary: 255, 255, 255;
+		--color-theme: 9, 53, 69;
+		--color-theme-reverse: 229, 229, 229;
+	}
+
+	html {
+		font-family: 'Montserrat', sans-serif;
+	}
+
+	body {
+		font-size: 16px;
+		@apply bg-theme h-screen;
+	}
+
+	h1, h2, h3, h4, h5, h6, p, span, input {
+		@apply text-theme-reverse;
+	}
+
+	/* Redefine browser background color for autofilled input */
+	.theme-autofill:-webkit-autofill {
+		-webkit-box-shadow: 0 0 0 50px rgb(var(--color-theme-reverse)) inset !important;
+		-webkit-text-fill-color: rgb(var(--color-theme)) !important;
+	}
+}

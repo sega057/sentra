@@ -1,7 +1,8 @@
 import React from "react";
 import { BoolDot } from "../../bool-dot/bool-dot";
+import { AuthField } from "../auth-field/auth-field";
 
-interface LoginFormProps {
+interface LoginFieldProps {
 	login: string;
 	setLogin: React.Dispatch<string>;
 	isValid?: boolean;
@@ -11,7 +12,7 @@ type InputProps = Partial<
 	Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange">
 >;
 
-export const LoginForm: React.FC<LoginFormProps & InputProps> = ({
+export const LoginField: React.FC<LoginFieldProps & InputProps> = ({
 	login,
 	setLogin,
 	isValid,
@@ -30,19 +31,17 @@ export const LoginForm: React.FC<LoginFormProps & InputProps> = ({
 	};
 
 	return (
-		<div className="input-wrapper login">
-			<input
-				required
-				className="form-control"
-				type="text"
-				name="login"
-				placeholder="Login"
-				minLength={4}
-				value={login}
-				onChange={handleChange}
-				{...rest}
-			/>
-			{isValid !== undefined && <BoolDot isRed={isValid} />}
-		</div>
+		<AuthField
+			required
+			type="text"
+			name="login"
+			placeholder="Login"
+			minLength={4}
+			value={login}
+			onChange={handleChange}
+			{...rest}
+		>
+			{isValid !== undefined && <BoolDot isRed={isValid} inForm />}
+		</AuthField>
 	);
 };

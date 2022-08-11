@@ -1,11 +1,12 @@
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks/use-app";
-import { setRepeatPass, signup } from "../../../store/sign-up/sign-up.slice";
-import { PasswordForm } from "../../../components/forms";
+import { setRepeatPass } from "../../../store/sign-up/sign-up.slice";
+import { PasswordField } from "../../../components/forms";
 
-export const RepeatPasswordForm = () => {
-	const repeatPassword = useAppSelector(signup.select("repeatPass"));
-	const isPassEqual = useAppSelector(signup.select("isPasswordsEq"));
+export const RepeatPasswordField = () => {
+	const { repeatPassword, isPasswordsEq } = useAppSelector(
+		(state) => state.signUp,
+	);
 	const dispatch = useAppDispatch();
 
 	const handlePassChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -13,10 +14,10 @@ export const RepeatPasswordForm = () => {
 	};
 
 	return (
-		<PasswordForm
+		<PasswordField
 			password={repeatPassword}
 			handleChange={handlePassChange}
-			isValid={!isPassEqual}
+			isValid={!isPasswordsEq}
 			name="repeat password"
 			placeholder="Repeat password"
 		/>

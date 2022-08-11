@@ -1,4 +1,4 @@
-body[data-theme="dark"] {
+[data-theme="dark"] {
 	.bottom-decor {
 		.first {
 			fill-opacity: .09;
@@ -9,12 +9,4 @@ body[data-theme="dark"] {
 			fill-opacity: .13;
 		}
 	}
-}
-
-.bottom-decor {
-	width: 1920px;
-	height: 111px;
-	position: absolute;
-	bottom: 0;
-	z-index: -1;
 }
