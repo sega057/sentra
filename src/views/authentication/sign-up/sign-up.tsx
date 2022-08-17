@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../../hooks/use-app";
-import { setLogin } from "../../../store/sign-up/sign-up.slice";
-import { LoginField } from "../../../components/forms";
-import { SubmitBtn } from "../../../components/buttons";
+import { useAppDispatch, useAppSelector } from "@/hooks/use-app";
+import { setLogin } from "@/store/sign-up/sign-up.slice";
+import { LoginField } from "@components/forms";
+import { SubmitBtn } from "@components/buttons";
 import { NewPasswordField } from "./new-password-field";
 import { RepeatPasswordField } from "./repeat-password-field";
 

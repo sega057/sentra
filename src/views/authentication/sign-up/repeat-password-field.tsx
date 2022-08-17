@@ -1,7 +1,7 @@
 import React from "react";
-import { useAppDispatch, useAppSelector } from "../../../hooks/use-app";
-import { setRepeatPass } from "../../../store/sign-up/sign-up.slice";
-import { PasswordField } from "../../../components/forms";
+import { useAppDispatch, useAppSelector } from "@/hooks/use-app";
+import { setRepeatPass } from "@/store/sign-up/sign-up.slice";
+import { PasswordField } from "@components/forms";
 
 export const RepeatPasswordField = () => {
 	const { repeatPassword, isPasswordsEq } = useAppSelector(

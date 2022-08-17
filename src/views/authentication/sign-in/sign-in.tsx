@@ -1,11 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
-import { useAppDispatch } from "../../../hooks/use-app";
-import { useInput } from "../../../hooks/use-input";
-import { loggedIn } from "../../../store/user/user.slice";
-import { LoginField, PasswordField } from "../../../components/forms";
-import { SubmitBtn } from "../../../components/buttons";
+import { useAppDispatch } from "@/hooks/use-app";
+import { useInput } from "@/hooks/use-input";
+import { loggedIn } from "@/store/user/user.slice";
+import { LoginField, PasswordField } from "@components/forms";
+import { SubmitBtn } from "@components/buttons";
 
 export const SignInPage: React.FC = () => {
 	const navigate = useNavigate();

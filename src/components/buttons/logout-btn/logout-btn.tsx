@@ -1,5 +1,5 @@
-import { useAppDispatch } from "../../../hooks/use-app";
-import { logout } from "../../../store/user/user.slice";
+import { useAppDispatch } from "@/hooks/use-app";
+import { logout } from "@/store/user/user.slice";
 
 export const LogoutBtn = () => {
 	const dispatch = useAppDispatch();

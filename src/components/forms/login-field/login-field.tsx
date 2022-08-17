@@ -1,6 +1,6 @@
 import React from "react";
 import { BoolDot } from "../../bool-dot/bool-dot";
-import { AuthField } from "../auth-field/auth-field";
+import { AuthField } from "@components/forms";
 
 interface LoginFieldProps {
 	login: string;

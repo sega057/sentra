@@ -1,8 +1,8 @@
 import React from "react";
-import { useAppDispatch, useAppSelector } from "../../../hooks/use-app";
-import { setPassword } from "../../../store/sign-up/sign-up.slice";
-import { PasswordField } from "../../../components/forms";
-import { BoolDot } from "../../../components/bool-dot/bool-dot";
+import { useAppDispatch, useAppSelector } from "@/hooks/use-app";
+import { setPassword } from "@/store/sign-up/sign-up.slice";
+import { PasswordField } from "@components/forms";
+import { BoolDot } from "@components/bool-dot/bool-dot";
 
 export const NewPasswordField = () => {
 	const { value: password, checks } = useAppSelector(

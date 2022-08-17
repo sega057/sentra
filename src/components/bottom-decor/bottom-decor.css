@@ -1,0 +1,8 @@
+[data-theme="dark"] .bottom-decor .first {
+	fill-opacity: .09;
+}
+
+[data-theme="dark"] .bottom-decor .second {
+	fill: #E5E5E5;
+	fill-opacity: .13;
+}

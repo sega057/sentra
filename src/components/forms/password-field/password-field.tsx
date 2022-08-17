@@ -1,8 +1,8 @@
 import React, { InputHTMLAttributes } from "react";
-import { MIN_PASS_LENGTH } from "../../../utils/constants/env-vars";
+import { MIN_PASS_LENGTH } from "@/utils/constants/env-vars";
 import { BoolDot } from "../../bool-dot/bool-dot";
 import { EyeToggle } from "../../eye-toggle/eye-toggle";
-import { AuthField } from "../auth-field/auth-field";
+import { AuthField } from "@components/forms";
 
 interface PasswordFieldProps {
 	password: string;
