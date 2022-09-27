@@ -1,13 +1,14 @@
 import * as React from "react";
-import { Outlet } from "react-router-dom";
-import { LogoutBtn } from "@components/buttons";
+import { AsidePanel } from "@components/layouts/aside/aside-panel";
+import { Outlet } from "react-router";
 
-export const MainPage = () => {
+export const ChatPage = () => {
 	return (
-		<>
-			<h1>Main app</h1>
-			<LogoutBtn />
-			<Outlet />
-		</>
+		<div className="flex h-screen">
+			<AsidePanel />
+			<div className="flex h-full w-full">
+				<Outlet />
+			</div>
+		</div>
 	);
 };

@@ -7,7 +7,7 @@ export enum ChatTypes {
 export interface Chat {
 	id: number;
 	type: ChatTypes;
-	lastUpdated?: number; // to range chats in list
+	lastUpdated: number; // to range chats in list
 	// isPinned?: true;
 
 	userId: number; // for private chats

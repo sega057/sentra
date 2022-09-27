@@ -45,7 +45,6 @@ module.exports = {
 	devServer: {
 		port,
 		hot: !isProd,
-		open: true,
 		historyApiFallback: true,
 	},
 	devtool: isProd ? false : "source-map",

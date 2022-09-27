@@ -1,5 +1,5 @@
 import { LoginField } from "./login-field/login-field";
 import { PasswordField } from "./password-field/password-field";
-import { AuthField } from "./auth-field/auth-field";
+import { ThemeField } from "./auth-field/theme-field";
 
-export { LoginField, PasswordField, AuthField };
+export { LoginField, PasswordField, ThemeField };

@@ -2,11 +2,16 @@ import React from "react";
 
 type AuthFieldProps = {
 	children?: React.ReactNode;
+	wrapperClassName?: string;
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, "className">;
 
-export const AuthField: React.FC<AuthFieldProps> = ({ children, ...rest }) => {
+export const ThemeField: React.FC<AuthFieldProps> = ({
+	children,
+	wrapperClassName,
+	...rest
+}) => {
 	return (
-		<div className="relative mb-8">
+		<div className={wrapperClassName ? wrapperClassName : "relative mb-8"}>
 			<input
 				className="theme-autofill w-full rounded-xl bg-primary px-5 py-3 font-secondary
 				text-sm text-theme outline-none transition-shadow

@@ -22,7 +22,10 @@ const chatsSlice = createSlice({
 		addLoadedChats(state, action: PayloadAction<Array<Chat>>) {
 			state.chats.push(...action.payload);
 		},
-		setOpenedChatId(state, action: PayloadAction<number>) {
+		setOpenedChatId(
+			state,
+			action: PayloadAction<ChatsState["openedChatId"]>,
+		) {
 			state.openedChatId = action.payload;
 		},
 		removeChatById(state, action: PayloadAction<number>) {
@@ -36,6 +39,13 @@ const chatsSlice = createSlice({
 
 export const chatsReducer = chatsSlice.reducer;
 
+export const {
+	setInitialChats,
+	addLoadedChats,
+	setOpenedChatId,
+	removeChatById,
+} = chatsSlice.actions;
+
 function chatsMock(): ChatsState {
 	return {
 		chats: [
@@ -43,23 +53,27 @@ function chatsMock(): ChatsState {
 				id: 1,
 				type: ChatTypes.private,
 				userId: 1,
+				lastUpdated: Date.now() - 4000,
 			},
 			{
 				id: 2,
 				type: ChatTypes.private,
 				userId: 2,
+				lastUpdated: Date.now() - 6000,
 			},
 			{
 				id: 3,
 				type: ChatTypes.private,
 				userId: 3,
+				lastUpdated: Date.now() - 2000,
 			},
 			{
 				id: 4,
 				type: ChatTypes.private,
 				userId: 4,
+				lastUpdated: Date.now(),
 			},
 		],
-		openedChatId: undefined,
+		openedChatId: 1,
 	};
 }

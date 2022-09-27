@@ -1,6 +1,6 @@
 import React from "react";
 import { BoolDot } from "../../bool-dot/bool-dot";
-import { AuthField } from "@components/forms";
+import { ThemeField } from "@components/forms";
 
 interface LoginFieldProps {
 	login: string;
@@ -31,7 +31,7 @@ export const LoginField: React.FC<LoginFieldProps & InputProps> = ({
 	};
 
 	return (
-		<AuthField
+		<ThemeField
 			required
 			type="text"
 			name="login"
@@ -42,6 +42,6 @@ export const LoginField: React.FC<LoginFieldProps & InputProps> = ({
 			{...rest}
 		>
 			{isValid !== undefined && <BoolDot isRed={isValid} inForm />}
-		</AuthField>
+		</ThemeField>
 	);
 };

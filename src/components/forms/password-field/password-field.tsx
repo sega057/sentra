@@ -2,7 +2,7 @@ import React, { InputHTMLAttributes } from "react";
 import { MIN_PASS_LENGTH } from "@/utils/constants/env-vars";
 import { BoolDot } from "../../bool-dot/bool-dot";
 import { EyeToggle } from "../../eye-toggle/eye-toggle";
-import { AuthField } from "@components/forms";
+import { ThemeField } from "@components/forms";
 
 interface PasswordFieldProps {
 	password: string;
@@ -27,7 +27,7 @@ export const PasswordField: React.FC<PasswordFieldProps & InputProps> = ({
 	};
 
 	return (
-		<AuthField
+		<ThemeField
 			required
 			type={showPass ? "text" : "password"}
 			name="password"
@@ -39,6 +39,6 @@ export const PasswordField: React.FC<PasswordFieldProps & InputProps> = ({
 		>
 			{isValid !== undefined && <BoolDot isRed={isValid} inPassForm />}
 			<EyeToggle isOpened={showPass} onClick={handleShow} />
-		</AuthField>
+		</ThemeField>
 	);
 };
