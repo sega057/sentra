@@ -9,7 +9,7 @@ export const AuthPageWrapper: React.FC = () => {
 		<div className="flex h-screen flex-col">
 			<Header />
 			<main className="relative mt-14 grow xl:mt-32">
-				<div className="container mx-auto mb-12 flex flex-col items-center">
+				<div className="container mx-auto mb-12 flex max-w-xs flex-col items-center">
 					<Outlet />
 				</div>
 			</main>

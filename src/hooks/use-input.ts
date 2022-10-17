@@ -11,17 +11,14 @@ interface UseInput {
 export function useInput(validator?: (val: string) => string): UseInput {
 	const [input, setInput] = React.useState("");
 
-	const handleChange = (
-		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-	) => {
-		const { value } = e.target;
+	const handleChange = React.useCallback(
+		(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+			const { value } = e.target;
 
-		if (validator) {
-			setInput(validator(value));
-		} else {
-			setInput(value);
-		}
-	};
+			setInput(validator ? validator(value) : value);
+		},
+		[validator],
+	);
 
 	return {
 		value: input,

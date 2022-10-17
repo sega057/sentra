@@ -1,47 +1,80 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "@/hooks/use-app";
-import { setLogin } from "@/store/sign-up/sign-up.slice";
-import { LoginField } from "@components/forms";
+import { Link, createSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router";
+import { Auth } from "@aws-amplify/auth";
+import { useAppDispatch, useAppSelector } from "@src/hooks/use-app";
+import { flushSingUp, setUsername } from "@src/store/sign-up/sign-up.slice";
+import { UsernameField } from "@components/forms";
 import { SubmitBtn } from "@components/buttons";
-import { NewPasswordField } from "./new-password-field";
+import { NewPasswordForm } from "./new-password-form";
 import { RepeatPasswordField } from "./repeat-password-field";
+import { EmailField } from "@components/forms/email-field";
+import { MIN_USERNAME_LENGTH } from "@src/utils/constants/env-vars";
+import { validateUsername } from "@src/utils/helpers/validators";
 
 export const SignUpPage = () => {
-	// const navigate = useNavigate();
-	const { username } = useAppSelector((state) => state.signUp);
+	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
+	const { username, email, password, isPasswordsEq } = useAppSelector(
+		(state) => state.signUp,
+	);
 
-	const setLoginDispatch = (login: string) => dispatch(setLogin(login));
+	const handleUsernameChange = React.useCallback(
+		(e: React.ChangeEvent<HTMLInputElement>) => {
+			dispatch(setUsername(validateUsername(e.target.value)));
+		},
+		[dispatch],
+	);
 
-	// const isDataValid = (): boolean => {
-	// 	const isPassValid = password.value.length >= 6
-	// 		&& Object.values(password.checks).every(val => val === true);
-	//
-	// 	return username.length >= 4 && isPassValid && isPasswordsEq;
-	// }
-
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		// if (password === "12341234" && sign-in === "admin") {
-		// 	dispatch(loggedIn(sign-in));
-		// 	navigate("/");
-		// } else {
-		// 	window.alert("Some error happened");
-		// }
+		if (!password.isValid || !isPasswordsEq) {
+			window.alert("Wrong password data");
+			return;
+		}
+
+		try {
+			const payload = await Auth.signUp({
+				username,
+				password: password.value,
+				attributes: {
+					email: email.value,
+				},
+				// autoSignIn: {
+				// 	enabled: true,
+				// },
+			});
+			console.log("payload", payload);
+			dispatch(flushSingUp());
+			navigate({
+				pathname: "/login",
+				search: `?${createSearchParams({
+					notificationType: "success",
+					notificationMessage:
+						"Registration completed successfully. Verify your email address by clicking on the link sent to you in the email message.",
+				})}`,
+			});
+		} catch (error) {
+			console.log("error signing up:", error);
+		}
 	};
 
 	return (
 		<>
-			<h1 className="mb-10 font-secondary text-6xl">Sign up</h1>
-			<p className="mb-9">Sign up to join best social media!</p>
-			<form className="w-full max-w-xs" onSubmit={handleSubmit}>
-				<LoginField
-					isValid={username.length < 4}
-					login={username}
-					setLogin={setLoginDispatch}
+			<h1 className="mb-10 font-secondary text-6xl text-theme-reverse">
+				Sign up
+			</h1>
+			<p className="mb-9 text-theme-reverse">
+				Sign up to join modern messenger!
+			</p>
+			<form className="w-full" onSubmit={handleSubmit}>
+				<UsernameField
+					isValid={username.length >= MIN_USERNAME_LENGTH}
+					username={username}
+					onChange={handleUsernameChange}
 				/>
-				<NewPasswordField />
+				<EmailField />
+				<NewPasswordForm />
 				<RepeatPasswordField />
 				<Link
 					className="mb-5 inline-block text-theme-reverse"

@@ -1,9 +1,9 @@
 import * as React from "react";
-import { useAppDispatch, useAppSelector } from "@/hooks/use-app";
+import { useAppDispatch, useAppSelector } from "@src/hooks/use-app";
 import { ChatListItem } from "@components/layouts/chat-list-item/chat-list-item";
-import { ChatTypes } from "@/store/chats/types";
-import { setOpenedChatId } from "@/store/chats/chats.slice";
-import { getPrivateChatName } from "@/utils/helpers/get-private-chat-name";
+import { ChatTypes } from "@src/store/chats/types";
+import { setOpenedChatId } from "@src/store/chats/chats.slice";
+import { getPrivateChatName } from "@src/utils/helpers/get-private-chat-name";
 
 export const ChatsList = () => {
 	const dispatch = useAppDispatch();

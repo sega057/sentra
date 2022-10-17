@@ -1,7 +1,8 @@
 import React from "react";
-import { useAppDispatch, useAppSelector } from "@/hooks/use-app";
-import { setRepeatPass } from "@/store/sign-up/sign-up.slice";
+import { useAppDispatch, useAppSelector } from "@src/hooks/use-app";
+import { setRepeatPass } from "@src/store/sign-up/sign-up.slice";
 import { PasswordField } from "@components/forms";
+import { FormBoolDot } from "@components/bool-dot/form-bool-dot";
 
 export const RepeatPasswordField = () => {
 	const { repeatPassword, isPasswordsEq } = useAppSelector(
@@ -16,10 +17,12 @@ export const RepeatPasswordField = () => {
 	return (
 		<PasswordField
 			password={repeatPassword}
-			handleChange={handlePassChange}
-			isValid={!isPasswordsEq}
+			onChange={handlePassChange}
 			name="repeat password"
 			placeholder="Repeat password"
-		/>
+			paddingRight="pr-16"
+		>
+			<FormBoolDot isValid={isPasswordsEq} rightClass="right-12" />
+		</PasswordField>
 	);
 };

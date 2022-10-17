@@ -1,15 +1,22 @@
 import { NavLink } from "react-router-dom";
+import { Auth } from "@aws-amplify/auth";
 import { NoPhotoIcon, MessageIcon, GearIcon } from "@components/icons";
 import { ContactsBookIcon } from "@components/icons/contacts-book-icon";
 import { LogoutIcon } from "@components/icons/logout-icon";
-import { useAppDispatch } from "@/hooks/use-app";
-import { logout } from "@/store/user/user.slice";
+import { useAppDispatch } from "@src/hooks/use-app";
+import { logout } from "@src/store/user/user.slice";
 
 export const AsidePanel = () => {
 	const dispatch = useAppDispatch();
 
-	const handleLogout = () => {
-		dispatch(logout());
+	const handleLogout = async () => {
+		try {
+			await Auth.signOut();
+			dispatch(logout());
+		} catch (error) {
+			window.alert("Failed to logout");
+			console.log("error signing out: ", error);
+		}
 	};
 
 	return (
@@ -34,7 +41,7 @@ export const AsidePanel = () => {
 				</NavLink>
 			</div>
 			<div className="flex flex-col items-center gap-y-5">
-				<NavLink to="/config" className="p-1.5">
+				<NavLink to="/settings" className="p-1.5">
 					{({ isActive }) => (
 						<GearIcon
 							fillClass={isActive ? "fill-green-600" : undefined}

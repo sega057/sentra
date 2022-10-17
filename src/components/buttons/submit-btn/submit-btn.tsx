@@ -5,8 +5,8 @@ export const SubmitBtn: React.FC<{ children?: React.ReactNode }> = ({
 }) => {
 	return (
 		<button
-			className="w-full rounded-xl bg-green-400 px-5 py-3 font-secondary
-			text-white transition-shadow ease-linear hover:shadow-md hover:shadow-green-500"
+			className="hover:shadow-green-500 w-full rounded-xl bg-green-600 px-5 py-3
+			font-secondary text-white transition-shadow ease-linear hover:shadow-md"
 			type="submit"
 		>
 			{children}

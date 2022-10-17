@@ -1,10 +1,10 @@
 import React from "react";
 import dayjs from "dayjs";
-import { Theme, useTheme } from "@/hooks/use-theme";
+import { DARK_THEME, useTheme } from "@src/hooks/use-theme";
 
 export const ThemeBtn = () => {
 	const [isDark, setTheme] = React.useState(getIsDarkTheme);
-	useTheme(isDark ? Theme.dark : Theme.light);
+	useTheme(isDark ? DARK_THEME : undefined);
 
 	function getIsDarkTheme() {
 		const curHours = +dayjs().format("H");

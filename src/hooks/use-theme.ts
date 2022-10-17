@@ -1,16 +1,13 @@
 import React from "react";
 
-export enum Theme {
-	light = "light",
-	dark = "dark",
-}
+export const DARK_THEME = "dark";
 
-export function useTheme(value?: Theme | undefined): void {
+export function useTheme(theme?: typeof DARK_THEME | undefined): void {
 	React.useEffect(() => {
-		if (typeof value === "string") {
-			document.body.dataset.theme = value;
+		if (theme === DARK_THEME) {
+			document.body.dataset.theme = DARK_THEME;
 		} else {
 			document.body.removeAttribute("data-theme");
 		}
-	}, [value]);
+	}, [theme]);
 }

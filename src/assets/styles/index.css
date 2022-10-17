@@ -25,7 +25,9 @@
 
 	/* Redefine browser background color for autofilled input */
 	.theme-autofill:-webkit-autofill {
-		-webkit-box-shadow: 0 0 0 50px rgb(var(--color-theme-reverse)) inset !important;
-		-webkit-text-fill-color: rgb(var(--color-theme)) !important;
+		-webkit-box-shadow: 0 0 0 50px #224957 inset !important;
+		-webkit-text-fill-color: #ffffff !important;
+		transition-property: box-shadow;
+		transition-duration: 0s;
 	}
 }

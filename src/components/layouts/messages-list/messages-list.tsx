@@ -1,6 +1,6 @@
 import React from "react";
 import dayjs from "dayjs";
-import { Message } from "@/store/messages/types";
+import { Message } from "@src/store/messages/types";
 import { MessagesDateGroup } from "@components/layouts/messages-date-group/messages-date-group";
 
 interface MessagesListProps {

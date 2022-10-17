@@ -1,4 +1,4 @@
-import { useAppSelector } from "@/hooks/use-app";
+import { useAppSelector } from "@src/hooks/use-app";
 import * as React from "react";
 import { ChatDetails } from "@components/layouts/chat-details/chat-details";
 

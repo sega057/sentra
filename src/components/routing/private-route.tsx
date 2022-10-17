@@ -1,10 +1,9 @@
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import { useAppSelector } from "@/hooks/use-app";
-import { selectAuth } from "@/store/user/user.slice";
+import { useAppSelector } from "@src/hooks/use-app";
 
 export const PrivateRoute = () => {
-	// const isAuth = useAppSelector(selectAuth);
-	const isAuth = true;
-	return isAuth ? <Outlet /> : <Navigate to="/login" replace />;
+	const idToken = useAppSelector((state) => state.user.idToken);
+	// const idToken = true;
+	return idToken ? <Outlet /> : <Navigate to="/login" replace />;
 };

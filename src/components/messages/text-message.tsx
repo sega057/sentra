@@ -1,7 +1,7 @@
 import React from "react";
 import clsx from "clsx";
 import dayjs from "dayjs";
-import { Message } from "@/store/messages/types";
+import { Message } from "@src/store/messages/types";
 import { TickIcon } from "@components/icons";
 
 interface TextMessageProps {

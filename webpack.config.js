@@ -38,7 +38,7 @@ module.exports = {
 		extensions: [".ts", ".tsx", ".js", ".json"],
 		alias: {
 			// With ForkTsCheckerWebpackPlugin should be the same as in tsconfig
-			"@": path.resolve(__dirname, "src"),
+			"@src": path.resolve(__dirname, "src"),
 			"@components": path.resolve(__dirname, "src", "components"),
 		},
 	},

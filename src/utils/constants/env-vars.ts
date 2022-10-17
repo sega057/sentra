@@ -6,3 +6,4 @@ export enum Breakpoint {
 }
 
 export const MIN_PASS_LENGTH = 6;
+export const MIN_USERNAME_LENGTH = 4;

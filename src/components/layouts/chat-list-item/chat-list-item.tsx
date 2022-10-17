@@ -1,9 +1,9 @@
 import * as React from "react";
-import { Message } from "@/store/messages/types";
-import { useAppDispatch } from "@/hooks/use-app";
-import { setOpenedChatId } from "@/store/chats/chats.slice";
+import { Message } from "@src/store/messages/types";
+import { useAppDispatch } from "@src/hooks/use-app";
+import { setOpenedChatId } from "@src/store/chats/chats.slice";
 import { ChatPhotoCover } from "@components/chat-photo-cover/chat-photo-cover";
-import { getMessageDate } from "@/utils/helpers/get-message-date";
+import { getMessageDate } from "@src/utils/helpers/get-message-date";
 
 interface ChatListItemProps {
 	chatName: string;

@@ -1,5 +1,5 @@
-import { LoginField } from "./login-field/login-field";
-import { PasswordField } from "./password-field/password-field";
-import { ThemeField } from "./auth-field/theme-field";
+import { UsernameField } from "./username-field";
+import { PasswordField } from "./password-field";
+import { ThemeField } from "./theme-field";
 
-export { LoginField, PasswordField, ThemeField };
+export { UsernameField, PasswordField, ThemeField };

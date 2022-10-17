@@ -5,7 +5,7 @@ interface ChatContainerProps {
 	rightCol?: React.ReactNode;
 }
 
-export const ChatContainer: React.FC<ChatContainerProps> = ({
+export const ChatContentContainer: React.FC<ChatContainerProps> = ({
 	leftCol,
 	rightCol,
 }) => {

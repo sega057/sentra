@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import { TextMessage } from "@components/messages/text-message";
 import React from "react";
-import { Message } from "@/store/messages/types";
+import { Message } from "@src/store/messages/types";
 
 interface MessagesDateGroupProps {
 	date: string;

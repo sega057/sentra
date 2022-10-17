@@ -1,9 +1,9 @@
 import * as React from "react";
-import { useAppDispatch, useAppSelector } from "@/hooks/use-app";
+import { useAppDispatch, useAppSelector } from "@src/hooks/use-app";
 import { ChatPhotoCover } from "@components/chat-photo-cover/chat-photo-cover";
-import { getPrivateChatName } from "@/utils/helpers/get-private-chat-name";
+import { getPrivateChatName } from "@src/utils/helpers/get-private-chat-name";
 import { MagnifierIcon } from "@components/icons";
-import { sendMessage } from "@/store/messages/messages.slice";
+import { sendMessage } from "@src/store/messages/messages.slice";
 import { MessagesList } from "@components/layouts/messages-list/messages-list";
 
 interface ChatDetailsProps {

@@ -1,44 +1,73 @@
 import React from "react";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
-import { useAppDispatch } from "@/hooks/use-app";
-import { useInput } from "@/hooks/use-input";
-import { loggedIn } from "@/store/user/user.slice";
-import { LoginField, PasswordField } from "@components/forms";
+import { Auth } from "@aws-amplify/auth";
+import { useAppDispatch } from "@src/hooks/use-app";
+import { loggedIn } from "@src/store/user/user.slice";
+import { useInput } from "@src/hooks/use-input";
+import { PasswordField, UsernameField } from "@components/forms";
 import { SubmitBtn } from "@components/buttons";
+import { SignInNotification } from "@components/notifications/sign-in-notification";
+import { validateUsername } from "@src/utils/helpers/validators";
 
 export const SignInPage: React.FC = () => {
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
 
-	const [login, setLogin] = React.useState("");
 	const { value: password, onChange: handlePassChange } = useInput();
+	const { value: username, onChange: handleUsernameChange } =
+		useInput(validateUsername);
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		if (password === "123456" && login === "admin") {
-			dispatch(loggedIn(login));
+		try {
+			const user = await Auth.signIn(username, password);
+			const {
+				signInUserSession: {
+					idToken: { jwtToken: idToken },
+					refreshToken: { token: refreshToken },
+				},
+			} = user;
+
+			dispatch(
+				loggedIn({
+					username: user.username,
+					idToken,
+					refreshToken,
+				}),
+			);
 			navigate("/");
-		} else {
-			window.alert("test auth data: admin | 123456");
+		} catch (error) {
+			console.log("error signing in", error);
 		}
 	};
 
 	return (
 		<>
-			<h1 className="mb-10 font-secondary text-6xl">Sign in</h1>
-			<p className="mb-9">Sign in and start communicating!</p>
-			<form className="w-full max-w-xs" onSubmit={handleSubmit}>
-				<LoginField {...{ login, setLogin }} />
+			<h1 className="mb-10 font-secondary text-6xl text-theme-reverse">
+				Sign in
+			</h1>
+			<p className="mb-9 text-theme-reverse">
+				Sign in and start communicating!
+			</p>
+			<SignInNotification />
+			<form className="w-full" onSubmit={handleSubmit}>
+				<UsernameField
+					username={username}
+					onChange={handleUsernameChange}
+				/>
 				<PasswordField
 					password={password}
-					handleChange={handlePassChange}
+					onChange={handlePassChange}
 				/>
 				<div className="mb-5 flex justify-between">
 					<Link className="text-theme-reverse" to="/signup">
 						Sign up
 					</Link>
-					<Link className="text-theme-reverse" to="/password_reset">
+					<Link
+						className="text-theme-reverse dark:text-green-600"
+						to="/password_reset"
+					>
 						Forgot password?
 					</Link>
 				</div>
