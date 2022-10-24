@@ -38,6 +38,8 @@ export const SignUpPage = () => {
 				username,
 				password: password.value,
 				attributes: {
+					// eslint-disable-next-line camelcase
+					preferred_username: username,
 					email: email.value,
 				},
 				// autoSignIn: {

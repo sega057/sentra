@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { Auth } from "@aws-amplify/auth";
 import { useAppDispatch } from "@src/hooks/use-app";
-import { loggedIn } from "@src/store/user/user.slice";
+import { signIn } from "@src/store/user/user.slice";
 import { useInput } from "@src/hooks/use-input";
 import { PasswordField, UsernameField } from "@components/forms";
 import { SubmitBtn } from "@components/buttons";
@@ -30,7 +30,7 @@ export const SignInPage: React.FC = () => {
 			} = user;
 
 			dispatch(
-				loggedIn({
+				signIn({
 					username: user.username,
 					idToken,
 					refreshToken,

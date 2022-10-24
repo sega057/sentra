@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../store";
 
-interface UserState {
+export interface UserState {
 	username?: string;
 	idToken?: string;
 	refreshToken?: string;
@@ -13,10 +12,7 @@ export const userSlice = createSlice({
 	name: "user",
 	initialState,
 	reducers: {
-		loggedIn: (
-			state,
-			{ payload }: PayloadAction<Omit<UserState, "isAuth">>,
-		) => {
+		signIn: (state, { payload }: PayloadAction<Required<UserState>>) => {
 			const { username, idToken, refreshToken } = payload;
 			state.username = username;
 			state.idToken = idToken;
@@ -30,6 +26,6 @@ export const userSlice = createSlice({
 	},
 });
 
-export const { loggedIn, logout } = userSlice.actions;
+export const { signIn, logout } = userSlice.actions;
 
 export const userReducer = userSlice.reducer;
