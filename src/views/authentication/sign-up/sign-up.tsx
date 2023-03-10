@@ -3,14 +3,19 @@ import { Link, createSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { Auth } from "@aws-amplify/auth";
 import { useAppDispatch, useAppSelector } from "@src/hooks/use-app";
-import { flushSingUp, setUsername } from "@src/store/sign-up/sign-up.slice";
+import {
+	flushSingUp,
+	setEmail,
+	setEmailCheck,
+	setUsername,
+} from "@src/store/sign-up/sign-up.slice";
 import { UsernameField } from "@components/forms";
 import { SubmitBtn } from "@components/buttons";
 import { NewPasswordForm } from "./new-password-form";
 import { RepeatPasswordField } from "./repeat-password-field";
 import { EmailField } from "@components/forms/email-field";
 import { MIN_USERNAME_LENGTH } from "@src/utils/constants/env-vars";
-import { validateUsername } from "@src/utils/helpers/validators";
+import { isEmailValid, validateUsername } from "@src/utils/helpers/validators";
 
 export const SignUpPage = () => {
 	const navigate = useNavigate();
@@ -26,6 +31,23 @@ export const SignUpPage = () => {
 		[dispatch],
 	);
 
+	const handleEmailChange = React.useCallback(
+		(e: React.ChangeEvent<HTMLInputElement>) => {
+			dispatch(setEmail(e.target.value));
+		},
+		[dispatch, setEmail],
+	);
+
+	const handleEmailBlur = React.useCallback(
+		(e: React.FocusEvent<HTMLInputElement>) => {
+			const email = e.target.value;
+			if (email.length) {
+				dispatch(setEmailCheck(isEmailValid(email)));
+			}
+		},
+		[dispatch],
+	);
+
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		if (!password.isValid || !isPasswordsEq) {
@@ -35,7 +57,7 @@ export const SignUpPage = () => {
 
 		try {
 			const payload = await Auth.signUp({
-				username,
+				username: email.value,
 				password: password.value,
 				attributes: {
 					// eslint-disable-next-line camelcase
@@ -71,11 +93,16 @@ export const SignUpPage = () => {
 			</p>
 			<form className="w-full" onSubmit={handleSubmit}>
 				<UsernameField
-					isValid={username.length >= MIN_USERNAME_LENGTH}
 					username={username}
+					isValid={username.length >= MIN_USERNAME_LENGTH}
 					onChange={handleUsernameChange}
 				/>
-				<EmailField />
+				<EmailField
+					email={email.value}
+					isValid={email.isValid}
+					onChange={handleEmailChange}
+					onBlur={handleEmailBlur}
+				/>
 				<NewPasswordForm />
 				<RepeatPasswordField />
 				<Link

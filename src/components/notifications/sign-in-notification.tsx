@@ -3,11 +3,11 @@ import { Notification, NotificationType } from "@src/store/notifications/types";
 import { useSearchParams } from "react-router-dom";
 import { AuthPageNotification } from "@components/notifications/auth-page-notification";
 
-export const SignInNotification = () => {
+export const SignInNotification = React.memo(() => {
 	const [searchParams] = useSearchParams();
 	const [notification, setNotification] = React.useState<
 		undefined | Notification
-	>(undefined);
+	>();
 
 	React.useEffect(() => {
 		const type = searchParams.get("notificationType")?.trim();
@@ -31,4 +31,6 @@ export const SignInNotification = () => {
 			message={notification.message}
 		/>
 	);
-};
+});
+
+SignInNotification.displayName = "SignInNotification";

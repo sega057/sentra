@@ -1,47 +1,34 @@
 import React from "react";
 import { ThemeField } from "@components/forms/index";
-import { useAppDispatch, useAppSelector } from "@src/hooks/use-app";
-import { setEmail, setEmailCheck } from "@src/store/sign-up/sign-up.slice";
 import { FormBoolDot } from "@components/bool-dot/form-bool-dot";
 
-export const EmailField = () => {
-	const dispatch = useAppDispatch();
-	const { email } = useAppSelector((state) => state.signUp);
+interface EmailFieldProps {
+	email: string;
+	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	isValid?: null | boolean;
+}
 
-	const handleChange = React.useCallback(
-		(e: React.ChangeEvent<HTMLInputElement>) => {
-			dispatch(setEmail(e.target.value));
-		},
-		[dispatch, setEmail],
-	);
+type InputProps = Partial<
+	Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange">
+>;
 
-	const handleBlur = React.useCallback(
-		(e: React.FocusEvent<HTMLInputElement>) => {
-			const email = e.target.value;
-			if (email.length) {
-				dispatch(setEmailCheck(isEmailValid(email)));
-			}
-		},
-		[dispatch],
-	);
-
-	function isEmailValid(email: string) {
-		return /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
-			email,
-		);
-	}
-
+export const EmailField: React.FC<EmailFieldProps & InputProps> = ({
+	email,
+	onChange,
+	isValid,
+	...rest
+}) => {
 	return (
 		<ThemeField
 			required
 			type="email"
 			name="email"
 			placeholder="Email"
-			value={email.value}
-			onChange={handleChange}
-			onBlur={handleBlur}
+			value={email}
+			onChange={onChange}
+			{...rest}
 		>
-			<FormBoolDot isValid={email.isValid} />
+			{isValid !== undefined && <FormBoolDot isValid={isValid} />}
 		</ThemeField>
 	);
 };

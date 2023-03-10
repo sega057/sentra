@@ -48,7 +48,7 @@ export const ChatDetails: React.FC<ChatDetailsProps> = ({ openedChatId }) => {
 					<MagnifierIcon />
 				</div>
 			</div>
-			<MessagesList messages={messages[openedChatId]} />
+			<MessagesList messages={messages[openedChatId] ?? []} />
 			<input
 				type="text"
 				className="mx-auto mt-2.5 mb-5 w-4/5 rounded-lg bg-gray-50 px-3 py-2"

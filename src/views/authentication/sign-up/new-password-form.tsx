@@ -7,6 +7,7 @@ import {
 import { PasswordField } from "@components/forms";
 import { BoolDot } from "@components/bool-dot/bool-dot";
 import { MIN_PASS_LENGTH } from "@src/utils/constants/env-vars";
+import { replaceInvalidPasswordSymbols } from "@src/utils/helpers/validators";
 
 export const NewPasswordForm = () => {
 	const {
@@ -16,16 +17,9 @@ export const NewPasswordForm = () => {
 	} = useAppSelector((state) => state.signUp.password);
 	const dispatch = useAppDispatch();
 
-	function validatePasswordSymbols(password: string) {
-		return password.replace(
-			/[^а-яa-zA-Z0-9!@#$%^&*(){}[:;<>,.?/\\~_+=|\]-]/g,
-			"",
-		);
-	}
-
 	const handleChange = React.useCallback(
 		(e: React.ChangeEvent<HTMLInputElement>) => {
-			const password = validatePasswordSymbols(e.target.value);
+			const password = replaceInvalidPasswordSymbols(e.target.value);
 			dispatch(setPassword(password));
 		},
 		[dispatch],

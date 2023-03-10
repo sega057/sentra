@@ -1,3 +1,5 @@
+import { SocketActions } from "@src/api/socket-actions";
+
 const WEB_SOCKET_URL = "";
 const SOCKET_RECONNECTION_DELAY = 10000;
 
@@ -13,15 +15,15 @@ function getSocketUrl(authData: SocketAuthData) {
 
 export class SocketClient {
 	socket: WebSocket | undefined;
-	private readonly listeners: Record<string, Array<(data?: any) => void>>;
+	private readonly listeners: Record<string, Array<(data?: never) => void>>;
 	private socketUrl: string | undefined;
 
 	constructor() {
 		this.listeners = {};
 	}
 
-	setSocketAuthData(authData: SocketAuthData | undefined) {
-		this.socketUrl = authData ? getSocketUrl(authData) : undefined;
+	setSocketAuthData(authData: SocketAuthData) {
+		this.socketUrl = getSocketUrl(authData);
 	}
 
 	connect(onConnect?: () => void) {
@@ -46,15 +48,20 @@ export class SocketClient {
 		this.socket = undefined;
 	}
 
-	emit(eventName: string, data: any) {
+	emit(action: SocketActions, data: Record<string, string>) {
 		if (!this.socket) {
 			return;
 		}
 
-		this.socket.send(eventName + data);
+		this.socket.send(
+			JSON.stringify({
+				action,
+				...data,
+			}),
+		);
 	}
 
-	on(eventName: string, func: (data?: any) => void) {
+	on(eventName: string, func: (data?: never) => void) {
 		const eventListeners = this.listeners[eventName];
 		if (Array.isArray(eventListeners)) {
 			eventListeners.push(func);

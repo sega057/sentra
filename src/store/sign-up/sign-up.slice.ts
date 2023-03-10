@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { MIN_PASS_LENGTH } from "@src/utils/constants/env-vars";
+import { validatePassword as validatePass } from "@src/utils/helpers/validators";
 
 enum PassCheck {
 	lowercase = "lowercase",
@@ -45,30 +46,6 @@ const initialState: SignUpState = {
 	isPasswordsEq: false,
 };
 
-const validatePass = (password: string): PassChecks => {
-	const checks: PassChecks = {
-		lowercase: false,
-		uppercase: false,
-		digit: false,
-		symbol: false,
-	};
-
-	if (/[a-z]/g.test(password)) {
-		checks.lowercase = true;
-	}
-	if (/[A-Z]/.test(password)) {
-		checks.uppercase = true;
-	}
-	if (/[0-9]/.test(password)) {
-		checks.digit = true;
-	}
-	if (/[!@#$%^&*(){}[:;<>,.?/\\~_+=|\]-]/.test(password)) {
-		checks.symbol = true;
-	}
-
-	return checks;
-};
-
 export const signUpSlice = createSlice({
 	name: "signup",
 	initialState,
@@ -107,7 +84,7 @@ export const signUpSlice = createSlice({
 			}
 		},
 		flushSingUp: (state) => {
-			state = initialState;
+			Object.assign(state, initialState);
 		},
 	},
 });

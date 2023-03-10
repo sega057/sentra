@@ -1,7 +1,9 @@
 import { RootState } from "@src/store/store";
-import { Dispatch, Middleware } from "@reduxjs/toolkit";
+import { AnyAction, Dispatch, Middleware } from "@reduxjs/toolkit";
 import { SocketClient } from "@src/api/socket-client";
 import { logout, signIn, UserState } from "@src/store/user/user.slice";
+import { SocketActions } from "@src/api/socket-actions";
+import { searchChatsByName } from "@src/store/search/search.slice";
 
 interface SocketMiddlewareParams {
 	dispatch: Dispatch;
@@ -11,7 +13,7 @@ interface SocketMiddlewareParams {
 export default function socketMiddleware(socket: SocketClient): Middleware {
 	return ({ dispatch }: SocketMiddlewareParams) =>
 		(next) =>
-		(action) => {
+		(action: AnyAction) => {
 			const { type, payload } = action;
 
 			switch (type) {
@@ -19,6 +21,10 @@ export default function socketMiddleware(socket: SocketClient): Middleware {
 				case signIn.type: {
 					const { idToken, username } =
 						payload as Required<UserState>;
+					if (!idToken || !username) {
+						break;
+					}
+
 					socket.setSocketAuthData({
 						Username: username,
 						Authorizer: idToken,
@@ -31,6 +37,16 @@ export default function socketMiddleware(socket: SocketClient): Middleware {
 				case logout.type: {
 					socket.disconnect(1000);
 					break;
+				}
+
+				case searchChatsByName.type: {
+					const name = action.payload;
+					socket.emit(SocketActions.searchChatsByName, { name });
+					break;
+				}
+
+				case "socket/emit": {
+					const { action, data } = payload;
 				}
 
 				// 	// Set up all the socket event handlers

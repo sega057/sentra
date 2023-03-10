@@ -5,42 +5,46 @@ import { Auth } from "@aws-amplify/auth";
 import { useAppDispatch } from "@src/hooks/use-app";
 import { signIn } from "@src/store/user/user.slice";
 import { useInput } from "@src/hooks/use-input";
-import { PasswordField, UsernameField } from "@components/forms";
+import { PasswordField } from "@components/forms";
 import { SubmitBtn } from "@components/buttons";
 import { SignInNotification } from "@components/notifications/sign-in-notification";
-import { validateUsername } from "@src/utils/helpers/validators";
+import { SignInEmailField } from "@components/forms/sign-in-email-field";
 
 export const SignInPage: React.FC = () => {
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
 
 	const { value: password, onChange: handlePassChange } = useInput();
-	const { value: username, onChange: handleUsernameChange } =
-		useInput(validateUsername);
+	const { value: login, onChange: handleLoginChange } = useInput();
 
-	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-		try {
-			const user = await Auth.signIn(username, password);
-			const {
-				signInUserSession: {
-					idToken: { jwtToken: idToken },
-					refreshToken: { token: refreshToken },
-				},
-			} = user;
+	const handleSubmit = React.useCallback(
+		async (e: React.FormEvent<HTMLFormElement>) => {
+			e.preventDefault();
+			try {
+				const user = await Auth.signIn(login, password);
+				console.log(JSON.stringify(user, null, 4));
 
-			dispatch(
-				signIn({
-					username: user.username,
-					idToken,
-					refreshToken,
-				}),
-			);
-			navigate("/");
-		} catch (error) {
-			console.log("error signing in", error);
-		}
-	};
+				const {
+					signInUserSession: {
+						idToken: { jwtToken: idToken },
+						refreshToken: { token: refreshToken },
+					},
+				} = user;
+
+				dispatch(
+					signIn({
+						username: user.username,
+						idToken,
+						refreshToken,
+					}),
+				);
+				navigate("/");
+			} catch (error) {
+				console.log("error signing in", error);
+			}
+		},
+		[login, password, dispatch, navigate],
+	);
 
 	return (
 		<>
@@ -52,10 +56,7 @@ export const SignInPage: React.FC = () => {
 			</p>
 			<SignInNotification />
 			<form className="w-full" onSubmit={handleSubmit}>
-				<UsernameField
-					username={username}
-					onChange={handleUsernameChange}
-				/>
+				<SignInEmailField email={login} onChange={handleLoginChange} />
 				<PasswordField
 					password={password}
 					onChange={handlePassChange}

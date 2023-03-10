@@ -13,33 +13,30 @@ type InputProps = Partial<
 	Omit<InputHTMLAttributes<HTMLInputElement>, "onChange">
 >;
 
-export const PasswordField: React.FC<PasswordFieldProps & InputProps> = ({
-	password,
-	onChange,
-	paddingRight,
-	children,
-	...rest
-}) => {
-	const [isShown, setShow] = React.useState(false);
+export const PasswordField: React.FC<PasswordFieldProps & InputProps> =
+	React.memo(({ password, onChange, paddingRight, children, ...rest }) => {
+		const [isShown, setShow] = React.useState(false);
 
-	const handleShow = () => {
-		setShow((prev) => !prev);
-	};
+		const handleShow = () => {
+			setShow((prev) => !prev);
+		};
 
-	return (
-		<ThemeField
-			paddingRight={paddingRight ?? "pr-11"}
-			required
-			type={isShown ? "text" : "password"}
-			name="password"
-			placeholder="Password"
-			minLength={MIN_PASS_LENGTH}
-			value={password}
-			onChange={onChange}
-			{...rest}
-		>
-			{children}
-			<EyeToggle isOpened={isShown} onClick={handleShow} />
-		</ThemeField>
-	);
-};
+		return (
+			<ThemeField
+				paddingRight={paddingRight ?? "pr-11"}
+				required
+				type={isShown ? "text" : "password"}
+				name="password"
+				placeholder="Password"
+				minLength={MIN_PASS_LENGTH}
+				value={password}
+				onChange={onChange}
+				{...rest}
+			>
+				{children}
+				<EyeToggle isOpened={isShown} onClick={handleShow} />
+			</ThemeField>
+		);
+	});
+
+PasswordField.displayName = "PasswordField";
