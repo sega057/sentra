@@ -3,7 +3,6 @@ import { Navigate, Outlet } from "react-router-dom";
 import { useAppSelector } from "@src/hooks/use-app";
 
 export const PrivateRoute = () => {
-	const idToken = useAppSelector((state) => state.user.idToken);
-	// const idToken = true;
+	const idToken = useAppSelector((state) => state.client.idToken);
 	return idToken ? <Outlet /> : <Navigate to="/login" replace />;
 };

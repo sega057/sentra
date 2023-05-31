@@ -1,4 +1,5 @@
-import { createAction, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { SocketActions } from "@src/api/socket-actions";
 
 type SearchResultsItem = {
 	type: "chat" | "user";
@@ -7,31 +8,32 @@ type SearchResultsItem = {
 };
 
 type SearchState = {
-	searchTerm: string;
+	keyword: string;
 	searchResults?: SearchResultsItem[];
 	isLoading?: boolean;
 };
 
 const initialState: SearchState = {
-	searchTerm: "",
+	keyword: "",
 };
 
 const searchSlice = createSlice({
 	name: "search",
 	initialState,
 	reducers: {
-		setSearchTerm: (state, { payload }: PayloadAction<string>) => {
-			state.searchTerm = payload;
+		setSearchKeyword: (state, { payload }: PayloadAction<string>) => {
+			state.keyword = payload;
 		},
-		searchChatsByName: (state, { payload }: PayloadAction<string>) => {
+		[SocketActions.searchChatsByName]: (
+			state,
+			_action: PayloadAction<string>,
+		) => {
+			// TODO action with payload to use in websocket
 			state.isLoading = true;
 		},
 	},
 });
 
-export const searchChatsByName = createAction<string>(
-	"socket/searchChatsByName",
-);
-export const { setSearchTerm } = searchSlice.actions;
+export const { setSearchKeyword, searchChatsByName } = searchSlice.actions;
 
 export const searchReducer = searchSlice.reducer;

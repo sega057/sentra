@@ -9,32 +9,34 @@ const messagesSlice = createSlice({
 	name: "messages",
 	initialState,
 	reducers: {
-		setInitialMessages(
-			state,
-			action: PayloadAction<Record<number, Array<Message>>>,
-		) {
-			state = action.payload;
-		},
-		addLoadedMessages(
+		addMessagesToStart(
 			state,
 			action: PayloadAction<{ chatId: number; messages: Array<Message> }>,
 		) {
 			const { chatId, messages } = action.payload;
-			state[chatId].unshift(...messages);
+			if (!state[chatId]) {
+				state[chatId] = messages;
+			} else {
+				state[chatId].unshift(...messages);
+			}
+		},
+		addMessagesToEnd(
+			state,
+			action: PayloadAction<{ chatId: number; messages: Array<Message> }>,
+		) {
+			const { chatId, messages } = action.payload;
+			if (!state[chatId]) {
+				state[chatId] = messages;
+			} else {
+				state[chatId].push(...messages);
+			}
 		},
 		sendMessage(
 			state,
 			action: PayloadAction<{ chatId: number; message: Message }>,
 		) {
 			const { chatId, message } = action.payload;
-			state[chatId]?.push(message);
-		},
-		receiveNewMessage(
-			state,
-			action: PayloadAction<{ chatId: number; message: Message }>,
-		) {
-			const { chatId, message } = action.payload;
-			state[chatId]?.push(message);
+			state[chatId]?.unshift(message);
 		},
 		// updateEditedMessage(
 		// 	state,
@@ -55,12 +57,8 @@ const messagesSlice = createSlice({
 
 export const messagesReducer = messagesSlice.reducer;
 
-export const {
-	setInitialMessages,
-	addLoadedMessages,
-	receiveNewMessage,
-	sendMessage,
-} = messagesSlice.actions;
+export const { addMessagesToStart, addMessagesToEnd, sendMessage } =
+	messagesSlice.actions;
 
 function mockMessages(): MessagesState {
 	return {
@@ -179,7 +177,6 @@ function mockMessages(): MessagesState {
 				date: +dayjs("2022-06-05 03:20"),
 				text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
 			},
-			// test
 			{
 				id: 42733254545,
 				fromId: 2,

@@ -84,7 +84,7 @@ export class SocketClient {
 		this.socket.onmessage = (event) => {
 			const { eventName, ...data } = event.data;
 			this.listeners[eventName]?.forEach((func) => func(data));
-			console.log("Message from server ", event.data);
+			console.log("Server message:", event.data);
 		};
 	}
 
@@ -94,7 +94,7 @@ export class SocketClient {
 		}
 
 		this.socket.onclose = (event) => {
-			console.log("socket closed: ", event);
+			console.log("Socket closed: ", event);
 		};
 	}
 
@@ -104,7 +104,7 @@ export class SocketClient {
 		// }
 		//
 		// this.socket.onerror = (event) => {
-		// 	console.log("socket error: ", event);
+		// 	console.error("Socket error: ", event);
 		// 	this.socket = undefined;
 		//
 		// 	const interval = setInterval(() => {

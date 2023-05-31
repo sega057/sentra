@@ -1,22 +1,22 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-export interface UserState {
+export interface ClientState {
 	username: string | undefined;
 	idToken: string | undefined;
 	refreshToken: string | undefined;
 }
 
-const initialState: UserState = {
+const initialState: ClientState = {
 	username: undefined,
 	idToken: undefined,
 	refreshToken: undefined,
 };
 
-export const userSlice = createSlice({
-	name: "user",
+export const clientSlice = createSlice({
+	name: "client",
 	initialState,
 	reducers: {
-		signIn: (state, { payload }: PayloadAction<Required<UserState>>) => {
+		signIn: (state, { payload }: PayloadAction<Required<ClientState>>) => {
 			const { username, idToken, refreshToken } = payload;
 			state.username = username;
 			state.idToken = idToken;
@@ -30,6 +30,6 @@ export const userSlice = createSlice({
 	},
 });
 
-export const { signIn, logout } = userSlice.actions;
+export const { signIn, logout } = clientSlice.actions;
 
-export const userReducer = userSlice.reducer;
+export const clientReducer = clientSlice.reducer;

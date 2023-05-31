@@ -1,14 +1,16 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import { userReducer } from "./user/user.slice";
+import { clientReducer } from "./client/client.slice";
 import { signUpReducer } from "./sign-up/sign-up.slice";
 import { chatsReducer } from "./chats/chats.slice";
 import { messagesReducer } from "./messages/messages.slice";
-import { contactsReducer } from "./contacts/contacts.slice";
+import { usersReducer } from "./users/users.slice";
+import { searchReducer } from "./search/search.slice";
 
 export const rootReducer = combineReducers({
-	user: userReducer,
+	client: clientReducer,
 	signUp: signUpReducer,
 	chats: chatsReducer,
 	messages: messagesReducer,
-	contacts: contactsReducer,
+	users: usersReducer,
+	search: searchReducer,
 });

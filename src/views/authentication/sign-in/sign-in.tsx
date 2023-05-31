@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { Auth } from "@aws-amplify/auth";
 import { useAppDispatch } from "@src/hooks/use-app";
-import { signIn } from "@src/store/user/user.slice";
+import { signIn } from "@src/store/client/client.slice";
 import { useInput } from "@src/hooks/use-input";
 import { PasswordField } from "@components/forms";
 import { SubmitBtn } from "@components/buttons";
@@ -22,25 +22,25 @@ export const SignInPage: React.FC = () => {
 			e.preventDefault();
 			try {
 				const user = await Auth.signIn(login, password);
-				console.log(JSON.stringify(user, null, 4));
-
 				const {
 					signInUserSession: {
 						idToken: { jwtToken: idToken },
 						refreshToken: { token: refreshToken },
 					},
+					username,
 				} = user;
 
 				dispatch(
 					signIn({
-						username: user.username,
+						username,
 						idToken,
 						refreshToken,
 					}),
 				);
 				navigate("/");
 			} catch (error) {
-				console.log("error signing in", error);
+				console.error("Sign in error", error);
+				// TODO: show error notification
 			}
 		},
 		[login, password, dispatch, navigate],
@@ -52,7 +52,7 @@ export const SignInPage: React.FC = () => {
 				Sign in
 			</h1>
 			<p className="mb-9 text-theme-reverse">
-				Sign in and start communicating!
+				Sign in and start communication!
 			</p>
 			<SignInNotification />
 			<form className="w-full" onSubmit={handleSubmit}>

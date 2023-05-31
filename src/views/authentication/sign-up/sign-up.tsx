@@ -52,11 +52,12 @@ export const SignUpPage = () => {
 		e.preventDefault();
 		if (!password.isValid || !isPasswordsEq) {
 			window.alert("Wrong password data");
+			// TODO: show notification
 			return;
 		}
 
 		try {
-			const payload = await Auth.signUp({
+			await Auth.signUp({
 				username: email.value,
 				password: password.value,
 				attributes: {
@@ -68,7 +69,6 @@ export const SignUpPage = () => {
 				// 	enabled: true,
 				// },
 			});
-			console.log("payload", payload);
 			dispatch(flushSingUp());
 			navigate({
 				pathname: "/login",
@@ -79,7 +79,8 @@ export const SignUpPage = () => {
 				})}`,
 			});
 		} catch (error) {
-			console.log("error signing up:", error);
+			console.error("Sign up error", error);
+			// TODO: handle error and show notification
 		}
 	};
 

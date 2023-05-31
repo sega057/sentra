@@ -1,8 +1,8 @@
-export interface Contact {
+export interface User {
 	userId: number;
+	username: string;
 	firstName: string;
 	lastName?: string;
-	username?: string;
 	photo?: Array<PhotoSize>;
 	bio?: string;
 }
